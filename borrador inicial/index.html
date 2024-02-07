@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrama básico</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- <p id="p1" draggable="true" ondragstart="dragstartHandler(event)">This element is draggable.</p>
+    <div id="target" ondrop="dropHandler(event)" ondragover="dragoverHandler(event)">Drop Zone</div> -->
+
+    <div id="tools"></div>
+
+    <svg width="800px" height="600px">
+      <g>
+        <g>
+          <rect x="100" y="100" width="100px" height="50px" fill="lightgrey" border="grey" />
+          <text x="100" y="100">
+            <tspan x="125" y="125">Tarea 1</tspan>
+          </text>
+        </g>
+        <g>
+          <rect x="300" y="100" width="100px" height="50px" fill="lightgrey" />
+        </g>
+        <g>
+          <path
+            id="arrow"
+            d="M 200 125 L 300 125"
+            fill="black"
+            stroke-linecap="round"
+            stroke="black"
+            stroke-width="2"
+          />
+        </g>
+      </g>
+    </svg>
+
+    <script src="script.js"></script>
+  </body>
+</html>
