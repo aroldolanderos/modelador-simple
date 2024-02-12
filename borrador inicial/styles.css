@@ -1,0 +1,7 @@
+.draggable {
+  cursor: move;
+}
+
+svg {
+  border: 1px solid black;
+}

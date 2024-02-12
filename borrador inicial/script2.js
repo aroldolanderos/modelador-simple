@@ -1,3 +1,39 @@
+const svg = document.querySelector("svg");
+
+// Añadir funcionalidad de panning solo si se hace clic fuera de las tarjetas
+let isPanning = false;
+let startCoords = { x: 0, y: 0 };
+
+// Evento para iniciar el desplazamiento (panning) si se hace clic fuera de las tarjetas
+svg.addEventListener("mousedown", function (event) {
+  const target = event.target;
+  const isDraggable = target.classList.contains("draggable");
+  if (!isDraggable) {
+    isPanning = true;
+    startCoords = { x: event.clientX, y: event.clientY };
+  }
+});
+
+// Evento para finalizar el desplazamiento (panning)
+svg.addEventListener("mouseup", function () {
+  isPanning = false;
+});
+
+// Evento para desplazar el contenido mientras se mantiene presionado el mouse
+svg.addEventListener("mousemove", function (event) {
+  if (isPanning) {
+    const deltaX = event.clientX - startCoords.x;
+    const deltaY = event.clientY - startCoords.y;
+    svg.setAttribute(
+      "viewBox",
+      `${parseFloat(svg.viewBox.baseVal.x) - deltaX} ${parseFloat(svg.viewBox.baseVal.y) - deltaY} ${
+        svg.viewBox.baseVal.width
+      } ${svg.viewBox.baseVal.height}`
+    );
+    startCoords = { x: event.clientX, y: event.clientY };
+  }
+});
+
 // Función para obtener las coordenadas de un elemento SVG
 function getSVGCoords(svg, event) {
   const point = svg.createSVGPoint();
@@ -9,7 +45,6 @@ function getSVGCoords(svg, event) {
 
 // Función para actualizar la posición de la flecha
 function updateArrowPosition() {
-  const svg = document.querySelector("svg");
   const box1 = document.getElementById("box1");
   const box2 = document.getElementById("box2");
   const arrowLine = document.getElementById("arrowLine");
@@ -19,17 +54,15 @@ function updateArrowPosition() {
   const box2X = parseInt(box2.getAttribute("x")) + parseInt(box2.getAttribute("width")) / 2;
   const box2Y = parseInt(box2.getAttribute("y"));
 
-  const path = `M ${box1X + 0},${box1Y - 0} L ${box1X + 0},${box1Y + 50} ${box2X - 0},${box1Y + 50} ${box2X - 0},${
-    box2Y - 50
-  } ${box2X},${box2Y - 6}`;
+  const path = `M ${box1X},${box1Y} L ${box1X},${box1Y + 50} ${box2X},${box1Y + 50} ${box2X},${box2Y - 6}`;
 
   arrowLine.setAttribute("d", path);
 }
 
 // Función para manejar el inicio del arrastre
 function startDrag(evt) {
-  const svg = document.querySelector("svg");
   const target = evt.target;
+  const svg = document.querySelector("svg");
   const svgCoords = getSVGCoords(svg, evt);
   const offsetX = svgCoords.x - parseFloat(target.getAttribute("x"));
   const offsetY = svgCoords.y - parseFloat(target.getAttribute("y"));
@@ -83,9 +116,9 @@ function zoomOut() {
   svg.setAttribute("viewBox", newViewBox.join(" "));
 }
 
-const svg = document.querySelector("svg");
+const svgElement = document.getElementById("svg");
 
-svg.addEventListener("wheel", function (event) {
+svgElement.addEventListener("wheel", function (event) {
   event.preventDefault(); // Evitar el comportamiento de scroll predeterminado
 
   const delta = event.deltaY; // Obtener la dirección del scroll

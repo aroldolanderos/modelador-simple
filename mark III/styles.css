@@ -1,0 +1,82 @@
+.task-element.hover {
+  cursor: move;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.cuadricula {
+  margin-top: 50px;
+  border: 1px solid lightblue;
+  background-color: white; /* Fondo blanco */
+  width: 1200px;
+  height: 600px;
+}
+
+.dg-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+.ghost .dg-label {
+  fill: #0095ff;
+}
+
+.ghost.outline .dg-label {
+  fill: red !important;
+}
+
+.outline-task {
+  fill: none;
+}
+
+.task-element.selected .outline-task {
+  width: 130px;
+  height: 70px;
+  visibility: visible;
+  stroke: #0095ff;
+  stroke-width: 0.5px;
+  fill: none;
+}
+
+.real-task {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: black;
+  stroke-width: 1px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.task-off {
+  stroke-width: 1px;
+  fill: none;
+  stroke-width: 1px;
+  stroke: #c7c9d1;
+}
+
+.dragging-task .dg-label {
+  fill: #c7c9d1;
+}
+
+.dragging-task .real-task {
+  stroke-width: 1px;
+  fill: none;
+  stroke-width: 1px;
+  stroke: #c7c9d1;
+}
+
+.ghost-task {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #0095ff;
+  stroke-width: 1px;
+  fill: darkgray;
+  fill-opacity: 0.1;
+}
+
+.ghost.outline .ghost-task {
+  stroke: red;
+  fill: red;
+}

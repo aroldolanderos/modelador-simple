@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrama básico</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body style="text-align: center">
+    <svg id="simple-diagram" width="800" height="400">
+      <!-- tarea 1 -->
+      <g class="dg-element" data-element-id="123" style="display: block" transform="matrix(1 0 0 1 15 15)">
+        <g class="dg-visual">
+          <rect id="task1" width="130" height="60" rx="10" ry="10" class="dg-hit" />
+          <text lineHeight="1.2" class="dg-label">
+            <tspan x="40" y="36">Tarea 1</tspan>
+          </text>
+        </g>
+        <rect
+          x="0"
+          y="0"
+          width="130"
+          height="60"
+          style="fill: none; stroke-opacity: 0; stroke: white; stroke-width: 2px"
+        ></rect>
+        <rect x="-5" y="-5" rx="14" width="140" height="70" style="fill: none"></rect>
+      </g>
+    </svg>
+
+    <script src="script.js"></script>
+  </body>
+</html>
