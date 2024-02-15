@@ -1,0 +1,142 @@
+.top-menu {
+  padding: 0;
+  text-align: center;
+}
+
+.top-menu .item-menu {
+  display: inline-block;
+  padding: 15px;
+}
+
+.cuadricula {
+  margin: auto auto;
+  border: 1px solid lightblue;
+  background-color: white; /* Fondo blanco */
+  width: 1200px;
+  height: 600px;
+  overflow: auto;
+  display: block;
+}
+
+/* Diagrama General */
+.diagram-outline {
+  fill: none;
+}
+
+.diagram-hit {
+  fill: none;
+  stroke-opacity: 0;
+  stroke: white;
+  stroke-width: 15px;
+}
+
+/* POOL */
+.pool-rect {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.pool-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+}
+
+.pool-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  fill: rgb(34, 36, 42);
+}
+
+/* Lane */
+.lane-rect {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+  fill: white;
+  fill-opacity: 0.9;
+}
+
+.lane-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  fill: rgb(34, 36, 42);
+}
+
+/* Task */
+.real-task {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(0, 0, 0);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.dg-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+/* Circle - Inicio - Fin */
+.circle.circle-start {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.circle.circle-end {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 4px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+/* Arrows */
+.arrow-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1.5px;
+}
+
+.marker-arrow {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1.5px;
+  fill: rgb(34, 36, 42);
+}
+
+/* gateway */
+.gateway-polygon {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+.gateway-path {
+  fill: rgb(34, 36, 42);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+}

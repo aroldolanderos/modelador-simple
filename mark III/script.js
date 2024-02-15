@@ -1,3 +1,15 @@
+/* Variables globales
+
+- Tarea o elemento en foco
+- Tarea o elemento fantasma (drag & drop)
+- Coordenadas del elemento fantasma
+- Coordenadas del item en foco (el que se queda estático)
+- Mapping de las coordenadas de todos los elementos del mapa para manejo de colisiones
+- Área dibujable
+- Elementos a manipular (drag)
+
+*/
+
 let focusTask = null;
 let ghostTask = null;
 let gostCoords = null;

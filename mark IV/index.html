@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Diagrama básico</title>
+    <link href="styles.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="tools-container">
+      <div class="group">
+        <div class="tool-task item"></div>
+        <div class="tool-gateway item"></div>
+        <div class="tool-pool item"></div>
+        <button id="zoom-in">Zoom In</button>
+        <button id="zoom-out">Zoom Out</button>
+      </div>
+    </div>
+
+    <svg id="simple-diagram" class="cuadricula" data-element-id="svg-1234">
+      <g id="viewport" class="viewport" width="2500" height="2000" transform="matrix(1 0 0 1 0 0)">
+        <g class="layer-diagram-grid">
+          <rect x="-2480" y="-2480" width="5000" height="5000" fill="url(#grid-pattern)" />
+        </g>
+        <!-- <g class="layer-base"></g> No se para que es!-->
+        <g id="layer-root" class="layer-root" data-process-id="1234">
+          <g class="diagram-group">
+            <!-- Pool  -->
+            <g class="diagram-element diagram-shape" data-pool-id="pool-1234" transform="matrix(1 0 0 1 250 120)">
+              <g class="diagram-visual">
+                <rect class="pool-rect" width="800" height="320"></rect>
+                <path class="pool-path" d="M30,0L30,320"></path>
+                <text class="pool-label" transform="matrix(-1.83697e-16 -1 1 -1.83697e-16 0 225)">
+                  <tspan x="-15" y="18">Proceso de pruebas SIMPLE 3</tspan>
+                </text>
+              </g>
+              <rect x="-5" y="-5" rx="4" width="810" height="330" class="diagram-outline"></rect>
+              <rect class="diagram-hit diagram-hit-all" width="800" height="320"></rect>
+            </g>
+            <g class="diagram-children">
+              <!-- lane por default -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" data-lane-id="lane-1234" transform="matrix(1 0 0 1 280 120)">
+                  <g class="diagram-visual">
+                    <rect class="lane-rect" width="770" height="320"></rect>
+                    <text
+                      class="lane-label"
+                      lineHeight="1.2"
+                      class="djs-label"
+                      transform="matrix(-1.83697e-16 -1 1 -1.83697e-16 0 225)"
+                    >
+                      <tspan x="6" y="18">Lane de ejemplo n°1</tspan>
+                    </text>
+                  </g>
+                  <rect x="-5" y="-5" rx="4" width="780" height="330" class="diagram-outline" style="fill: none"></rect>
+                </g>
+              </g>
+
+              <!-- Inicio de proceso -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 325 272)">
+                  <g class="diagram-visual">
+                    <circle class="circle circle-start" cx="18" cy="18" r="18"></circle>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" x="0" y="0" width="36" height="36"></rect>
+                  <circle cx="18" cy="18" r="24" class="diagram-outline" style="fill: none"></circle>
+                </g>
+              </g>
+
+              <!-- Caja de tarea 1-->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 400 260)">
+                  <g class="diagram-visual">
+                    <rect width="120" height="60" class="real-task" rx="1" ry="1" />
+                    <text lineHeight="1" class="dg-label">
+                      <tspan x="38" y="36">Tarea 1</tspan>
+                    </text>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" width="120" height="60"></rect>
+                  <rect width="130" height="70" rx="2" x="-5" y="-5" class="diagram-outline" />
+                </g>
+              </g>
+
+              <!-- Caja de tarea 2a -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 680 200)">
+                  <g class="diagram-visual">
+                    <rect width="120" height="60" class="real-task" rx="1" ry="1" />
+                    <text lineHeight="1" class="dg-label">
+                      <tspan x="38" y="36">Tarea 2A</tspan>
+                    </text>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" width="120" height="60"></rect>
+                  <rect width="130" height="70" rx="2" x="-5" y="-5" class="diagram-outline" />
+                </g>
+              </g>
+
+              <!-- Caja de tarea 2b -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 680 320)">
+                  <g class="diagram-visual">
+                    <rect width="120" height="60" class="real-task" rx="1" ry="1" />
+                    <text lineHeight="1" class="dg-label">
+                      <tspan x="38" y="36">Tarea 2B</tspan>
+                    </text>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" width="120" height="60"></rect>
+                  <rect width="130" height="70" rx="2" x="-5" y="-5" class="diagram-outline" />
+                </g>
+              </g>
+
+              <!-- Fin de proceso -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 960 272)">
+                  <g class="diagram-visual">
+                    <circle class="circle circle-end" cx="18" cy="18" r="18"></circle>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" x="0" y="0" width="36" height="36"></rect>
+                  <circle cx="18" cy="18" r="24" class="diagram-outline" style="fill: none"></circle>
+                </g>
+              </g>
+
+              <!-- Apertura gateway -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 570 265)">
+                  <g class="diagram-visual">
+                    <polygon class="gateway-polygon" points="25,0 50,25 25,50 0,25"></polygon>
+                    <path
+                      class="gateway-path"
+                      d="m16,15 7.42857142857143,9.714285714285715 -7.42857142857143,9.714285714285715 3.428571428571429,0 5.714285714285715,-7.464228571428572 5.714285714285715,7.464228571428572 3.428571428571429,0 -7.42857142857143,-9.714285714285715 7.42857142857143,-9.714285714285715 -3.428571428571429,0 -5.714285714285715,7.464228571428572 -5.714285714285715,-7.464228571428572 -3.428571428571429,0 z"
+                    ></path>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" x="0" y="0" width="50" height="50"></rect>
+                  <rect x="2" y="2" rx="4" width="46" height="46" class="diagram-outline outline-gateway"></rect>
+                </g>
+              </g>
+
+              <!-- Cierre gateway -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-shape" transform="matrix(1 0 0 1 870 265)">
+                  <g class="diagram-visual">
+                    <polygon class="gateway-polygon" points="25,0 50,25 25,50 0,25"></polygon>
+                    <path
+                      class="gateway-path"
+                      d="m16,15 7.42857142857143,9.714285714285715 -7.42857142857143,9.714285714285715 3.428571428571429,0 5.714285714285715,-7.464228571428572 5.714285714285715,7.464228571428572 3.428571428571429,0 -7.42857142857143,-9.714285714285715 7.42857142857143,-9.714285714285715 -3.428571428571429,0 -5.714285714285715,7.464228571428572 -5.714285714285715,-7.464228571428572 -3.428571428571429,0 z"
+                    ></path>
+                  </g>
+                  <rect class="diagram-hit diagram-hit-all" x="0" y="0" width="50" height="50"></rect>
+                  <rect x="2" y="2" rx="4" width="46" height="46" class="diagram-outline outline-gateway"></rect>
+                </g>
+              </g>
+
+              <!-- Arrow 1 -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow1">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      data-corner-radius="5"
+                      fill="url(#marker-1)"
+                      marker-end="url('#marker-1')"
+                      d="M361,290 L399,290"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 2 -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow3">
+                  <g class="diagram-visual">
+                    <path class="arrow-demo" marker-end="url('#marker-1')" d="M520,290 L569,290"></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 3a -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow-3a">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      marker-end="url('#marker-1')"
+                      d="M 595,266 L 595,235 C 595,235, 595,230, 600,230 L 679,230"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 3b -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow-3b">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      marker-end="url('#marker-1')"
+                      d="M 595,316 L 595,345 C 595,345, 595,350, 600,350 L 679,350"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 4A -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow-4a">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      data-corner-radius="5"
+                      fill="url(#marker-1)"
+                      marker-end="url('#marker-1')"
+                      d="M 800,230 L 890,230 C 890,230, 895,230, 895,235 L 895,264"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 4B -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow-4b">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      data-corner-radius="5"
+                      fill="url(#marker-1)"
+                      marker-end="url('#marker-1')"
+                      d="M 800,350 L 890,350 C 890,350, 895,350, 895,345 L 895,316"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+
+              <!-- Arrow 5 fin -->
+              <g class="diagram-group">
+                <g class="diagram-element diagram-connection" data-element-id="arrow-5">
+                  <g class="diagram-visual">
+                    <path
+                      class="arrow-demo"
+                      data-corner-radius="5"
+                      fill="url(#marker-1)"
+                      marker-end="url('#marker-1')"
+                      d="M920,290 L958,290"
+                    ></path>
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+          <!-- a este nivel irian otros <g class="diagram-group"></g> con textos de notas -->
+        </g>
+
+        <!-- Se agregan coordenadas para redimencionar pool o lane -->
+        <g id="layer-resizers" class="layer-resizers">
+          <!-- Lane resizer -->
+          <!-- <g class="diagram-resizer diagram-LANE-ID diagram-resizer-n">
+            <rect x="666" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="660" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-w">
+            <rect x="271" y="281" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="265" y="275" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-s">
+            <rect x="666" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="660" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-e">
+            <rect x="1051" y="281" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="275" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-nw">
+            <rect x="271" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="265" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-ne">
+            <rect x="1051" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-se">
+            <rect x="1051" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-LANE-ID diagram-resizer-sw">
+            <rect x="271" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="265" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g> -->
+
+          <!-- Pool resiser -->
+          <!-- <g class="diagram-resizer diagram-POOL-ID diagram-resizer-n">
+            <rect x="655" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="649" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-w">
+            <rect x="241" y="281" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="235" y="275" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-s">
+            <rect x="655" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="649" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-e">
+            <rect x="1051" y="281" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="275" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-nw">
+            <rect x="241" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="235" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-ne">
+            <rect x="1051" y="111" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="105" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-se">
+            <rect x="1051" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="1045" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g>
+          <g class="diagram-resizer diagram-POOL-ID diagram-resizer-sw">
+            <rect x="241" y="441" width="8" height="8" class="diagram-resizer-visual"></rect>
+            <rect x="235" y="435" width="20" height="20" class="diagram-resizer-hit"></rect>
+          </g> -->
+        </g>
+      </g>
+
+      <defs>
+        <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="lightgrey" stroke-width="0.5" />
+        </pattern>
+        <marker id="marker-1" viewBox="0 0 20 20" refX="10" refY="10" markerWidth="10" markerHeight="10" orient="auto">
+          <path class="marker-arrow" d="M 1 5 L 11 10 L 1 15 Z"></path>
+        </marker>
+      </defs>
+    </svg>
+
+    <script src="script.js"></script>
+  </body>
+</html>

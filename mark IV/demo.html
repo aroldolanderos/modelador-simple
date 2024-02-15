@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <svg width="1200" height="600" style="border: 1px solid black">
+      <g class="viewport" width="3000" height="1500">
+        <g class="layer-diagram-grid">
+          <rect x="-2480" y="-2480" width="5000" height="5000" fill="url(#grid-pattern)"></rect>
+        </g>
+        <!-- Aquí colocarías tus elementos SVG internos -->
+        <!-- Ejemplo: -->
+        <circle cx="150" cy="150" r="50" fill="red" />
+        <circle cx="600" cy="300" r="50" fill="blue" />
+        <circle cx="1000" cy="500" r="50" fill="green" />
+      </g>
+      <defs>
+        <pattern id="grid-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="lightgrey" stroke-width="0.5"></path>
+        </pattern>
+      </defs>
+    </svg>
+
+    <script>
+      const viewport = document.querySelector(".viewport");
+      let isDragging = false;
+      let startX,
+        startY,
+        offsetX = 0,
+        offsetY = 0;
+
+      viewport.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.clientX - offsetX;
+        startY = e.clientY - offsetY;
+      });
+
+      viewport.addEventListener("mousemove", (e) => {
+        if (isDragging) {
+          const x = e.clientX - startX;
+          const y = e.clientY - startY;
+          offsetX = Math.min(0, Math.max(-viewport.getAttribute("width") + window.innerWidth, x));
+          offsetY = Math.min(0, Math.max(-viewport.getAttribute("height") + window.innerHeight, y));
+          viewport.setAttribute("transform", `translate(${offsetX}, ${offsetY})`);
+        }
+      });
+
+      document.addEventListener("mouseup", () => {
+        isDragging = false;
+      });
+    </script>
+  </body>
+</html>

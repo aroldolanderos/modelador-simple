@@ -1,0 +1,287 @@
+/*TOOLS*/
+.tools-container {
+  margin-top: 50px;
+  margin-right: 20px;
+  float: left;
+  width: 100px;
+  height: 200px;
+  border: solid 1px black;
+}
+
+.tools-container .group .item {
+  cursor: move;
+}
+
+.tools-container .group .tool-task {
+  margin: 30px 25px;
+  width: 49px;
+  height: 25px;
+  border: solid 2px black;
+  border-radius: 3px;
+}
+.tools-container .group .tool-gateway {
+  margin: 30px 38px;
+  width: 22px;
+  height: 22px;
+  border: solid 2px black;
+  border-radius: 3px;
+  transform: rotate(45deg);
+}
+.tools-container .group .tool-pool {
+  margin: 30px 25px;
+  width: 48px;
+  height: 25px;
+  border: solid 2px black;
+  border-radius: 1px;
+  position: relative;
+}
+.tools-container .group .tool-pool:before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: black;
+}
+
+/*END TOOLS*/
+
+.task-element.hover {
+  cursor: move;
+}
+
+.dragging {
+  opacity: 0.5;
+}
+
+.cuadricula {
+  margin-top: 50px;
+  border: 1px solid lightblue;
+  background-color: white; /* Fondo blanco */
+  width: 1200px;
+  height: 600px;
+  overflow: auto;
+  display: block;
+}
+
+.dg-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+}
+.ghost .dg-label {
+  fill: #0095ff;
+}
+
+.ghost.outline .dg-label {
+  fill: red !important;
+}
+
+.outline-task {
+  fill: none;
+}
+
+.task-element.selected .outline-task {
+  width: 130px;
+  height: 70px;
+  visibility: visible;
+  stroke: #0095ff;
+  stroke-width: 0.5px;
+  fill: none;
+}
+
+.real-task {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(0, 0, 0);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.task-off {
+  stroke-width: 1px;
+  fill: none;
+  stroke-width: 1px;
+  stroke: #c7c9d1;
+}
+
+.dragging-task .dg-label {
+  fill: #c7c9d1;
+}
+
+.dragging-task .real-task {
+  stroke-width: 1px;
+  fill: none;
+  stroke-width: 1px;
+  stroke: #c7c9d1;
+}
+
+.ghost-task {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: #0095ff;
+  stroke-width: 1px;
+  fill: darkgray;
+  fill-opacity: 0.1;
+}
+
+.ghost.outline .ghost-task {
+  stroke: red;
+  fill: red;
+}
+
+/* Nuevos css */
+
+.diagram-hit {
+  fill: none;
+  stroke-opacity: 0;
+  stroke: white;
+  stroke-width: 15px;
+}
+
+.diagram-outline {
+  fill: none;
+}
+
+.diagram-element.selected .diagram-outline {
+  visibility: visible;
+  stroke: #0095ff;
+}
+
+.diagram-outline.outline-gateway {
+  transform-box: fill-box;
+  transform: rotate(45deg);
+  transform-origin: center center;
+}
+
+/* POOL */
+
+.pool-rect {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.pool-path {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+}
+
+.pool-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  fill: rgb(34, 36, 42);
+}
+
+/* Lane */
+.lane-rect {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+  fill: white;
+  fill-opacity: 0.9;
+}
+
+.lane-path {
+}
+
+.lane-label {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: normal;
+  fill: rgb(34, 36, 42);
+}
+
+/* Circle */
+.circle.circle-start {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+.circle.circle-end {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 4px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+
+/* Arrows */
+.arrow-demo {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1.5px;
+}
+
+.marker-arrow {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1.5px;
+  fill: rgb(34, 36, 42);
+}
+
+/* gateway */
+.gateway-polygon {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 2px;
+  fill: white;
+  fill-opacity: 0.95;
+}
+.gateway-path {
+  fill: rgb(34, 36, 42);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke: rgb(34, 36, 42);
+  stroke-width: 1px;
+}
+
+/* resizer */
+.diagram-resizer .diagram-resizer-visual {
+  fill: #0086e6;
+  stroke-width: 1px;
+  stroke: #ffffff;
+  shape-rendering: geometricPrecision;
+}
+.diagram-resizer .diagram-resizer-hit {
+  fill: none;
+  pointer-events: all;
+}
+.diagram-resizer.diagram-resizer-n,
+.diagram-resizer.diagram-resizer-s {
+  cursor: ns-resize;
+}
+
+.diagram-resizer.diagram-resizer-e,
+.diagram-resizer.diagram-resizer-w {
+  cursor: ew-resize;
+}
+
+.diagram-resizer.diagram-resizer-se,
+.diagram-resizer.diagram-resizer-nw {
+  cursor: nwse-resize;
+}
+
+.diagram-resizer.diagram-resizer-ne,
+.diagram-resizer.diagram-resizer-sw {
+  cursor: nesw-resize;
+}
