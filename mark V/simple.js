@@ -114,57 +114,71 @@ const pool = {
   ],
   sequence_flow: [
     {
-      sequence_id: "seq-1",
+      sequence_id: "arrow-1",
       source_ref: "element-1",
       target_ref: "element-2",
-      start: { x: 361, y: 290 },
-      end: { x: 399, y: 290 },
+      waypoints: {
+        0: { x: 361, y: 290 },
+        1: { x: 399, y: 290 },
+      },
     },
     {
-      sequence_id: "seq-2",
+      sequence_id: "arrow-2",
       source_ref: "element-2",
       target_ref: "element-3",
-      start: { x: 520, y: 290 },
-      end: { x: 569, y: 290 },
+      waypoints: {
+        0: { x: 520, y: 290 },
+        1: { x: 569, y: 290 },
+      },
     },
     {
       sequence_id: "arrow-3a",
       source_ref: "element-3",
       target_ref: "element-4",
-      start: { x: 595, y: 266 },
-      curve: { x: 595, y: 230 },
-      end: { x: 679, y: 230 },
+      waypoints: {
+        0: { x: 595, y: 266 },
+        1: { x: 595, y: 230 },
+        2: { x: 679, y: 230 },
+      },
     },
     {
       sequence_id: "arrow-3b",
       source_ref: "element-3",
       target_ref: "element-5",
-      start: { x: 595, y: 316 },
-      curve: { x: 595, y: 350 },
-      end: { x: 679, y: 350 },
+      waypoints: {
+        0: { x: 595, y: 316 },
+        1: { x: 595, y: 350 },
+        2: { x: 679, y: 350 },
+      },
     },
     {
       sequence_id: "arrow-4a",
       source_ref: "element-4",
       target_ref: "element-6",
-      start: { x: 800, y: 230 },
-      curve: { x: 895, y: 230 },
-      end: { x: 895, y: 264 },
+      waypoints: {
+        0: { x: 800, y: 230 },
+        1: { x: 895, y: 230 },
+        2: { x: 895, y: 264 },
+      },
     },
     {
       sequence_id: "arrow-4b",
       source_ref: "element-5",
       target_ref: "element-6",
-      start: { x: 800, y: 350 },
-      curve: { x: 895, y: 350 },
-      end: { x: 895, y: 316 },
+      waypoints: {
+        0: { x: 800, y: 350 },
+        1: { x: 895, y: 350 },
+        2: { x: 895, y: 316 },
+      },
     },
     {
       sequence_id: "arrow-5",
       source_ref: "element-6",
       target_ref: "element-7",
-      start: { x: 920, y: 290 },
-      end: { x: 958, y: 290 },
+      waypoints: {
+        0: { x: 920, y: 290 },
+        1: { x: 958, y: 290 },
+      },
     },
   ],
 };
@@ -174,35 +188,71 @@ class Arrow {
     this.marker = params.marker || "#simple-arrow-marker";
     this.markerEnd = params.markerEnd || true;
     this.cornerRadius = params.cornerRadius || false;
-    this.arrowId = params.arrowId || "1234";
-    this.d = params.d;
+    this.secuence = params.sequence;
+  }
+
+  calculateDirection() {
+    const waypoints = this.secuence.waypoints;
+    const toalpoints = Object.keys(waypoints).length;
+    const start = `M${waypoints[0].x},${waypoints[0].y} `;
+    const end = `L${waypoints[toalpoints - 1].x},${waypoints[toalpoints - 1].y}`;
+    let direction = "";
+
+    direction += start;
+
+    if (toalpoints > 2) {
+      for (let i = 1; i < toalpoints - 1; i++) {
+        let middle = `L${waypoints[i].x},${waypoints[i].y} `;
+        direction += middle;
+      }
+    }
+    /*
+        Para curvas
+        cómo llegar de: 
+            d="M595,266 L595,230 L679,230"
+        a:
+            d="M595,266 L595,235 C 595,235, 595,230, 600,230 L679,230"
+            (considerar dirección: arriba, abajo, etc)
+    */
+    direction += end;
+
+    return direction;
   }
 
   getFigure() {
+    const direction = this.calculateDirection();
+
     const diagramGroup = Figure.initElementStatic("g");
     diagramGroup.setAttribute("class", "diagram-group");
 
     const diagramElement = Figure.initElementStatic("g");
     diagramElement.setAttribute("class", "diagram-element diagram-connection");
-    diagramElement.setAttribute("data-arrow-id", this.arrowId);
+    diagramElement.setAttribute("data-arrow-id", this.secuence.sequence_id);
 
     const visualGroup = Figure.initElementStatic("g");
     visualGroup.setAttribute("class", "diagram-visual");
 
     const visualPath = Figure.initElementStatic("path");
-    visualPath.setAttribute("class", "");
-    visualPath.setAttribute("data-corner-radius", "");
+
+    visualPath.setAttribute("class", "arrow-path");
     visualPath.setAttribute("fill", `url(${this.marker})`);
+
+    // hit
+    const hitPath = Figure.initElementStatic("path");
+    hitPath.setAttribute("class", "diagram-hit diagram-hit-all");
+    hitPath.setAttribute("d", direction);
+
     if (this.markerEnd) {
       visualPath.setAttribute("marker-end", `url('${this.marker}')`);
     }
     if (this.cornerRadius) {
       visualPath.setAttribute("data-corner-radius", "5");
     }
-    visualPath.setAttribute("d", this.d);
+    visualPath.setAttribute("d", direction);
 
     visualGroup.appendChild(visualPath);
     diagramElement.appendChild(visualGroup);
+    diagramElement.appendChild(hitPath);
     diagramGroup.appendChild(diagramElement);
 
     return diagramGroup;
@@ -328,8 +378,8 @@ class Figure {
     outlineRect.setAttribute("x", "-5");
     outlineRect.setAttribute("y", "-5");
     outlineRect.setAttribute("rx", "4");
-    outlineRect.setAttribute("width", this.width);
-    outlineRect.setAttribute("height", this.height);
+    outlineRect.setAttribute("width", parseInt(this.width) + 10);
+    outlineRect.setAttribute("height", parseInt(this.height) + 10);
 
     visualGroup.appendChild(visualRect);
     visualGroup.appendChild(text);
@@ -384,8 +434,8 @@ class Figure {
     outlineRect.setAttribute("x", "-5");
     outlineRect.setAttribute("y", "-5");
     outlineRect.setAttribute("rx", "2");
-    outlineRect.setAttribute("width", this.width);
-    outlineRect.setAttribute("height", this.height);
+    outlineRect.setAttribute("width", parseInt(this.width) + 10);
+    outlineRect.setAttribute("height", parseInt(this.height) + 10);
 
     diagramElement.appendChild(visualGroup);
     diagramElement.appendChild(hitRect);
@@ -428,12 +478,12 @@ class Figure {
     hitRect.setAttribute("height", this.height);
 
     const outlineRect = this.initElement("rect");
-    outlineRect.setAttribute("class", "diagram-outline outline-gateway");
+    outlineRect.setAttribute("class", "outline-gateway");
     outlineRect.setAttribute("x", "2");
     outlineRect.setAttribute("y", "2");
     outlineRect.setAttribute("rx", "4");
-    outlineRect.setAttribute("width", this.width);
-    outlineRect.setAttribute("height", this.height);
+    outlineRect.setAttribute("width", this.width - 4);
+    outlineRect.setAttribute("height", this.height - 4);
 
     diagramElement.appendChild(visualGroup);
     diagramElement.appendChild(hitRect);
@@ -571,16 +621,71 @@ class Figure {
   }
 }
 
+const GL = {
+  isDragging: false,
+  startX: 0,
+  startY: 0,
+  offsetX: 0,
+  offsetY: 0,
+  runClick: true,
+};
+
 class Matrix {
-  constructor(scaleX = 1, scaleY = 1, trslationX = 0, trslationY = 0) {
-    this.scaleX = scaleX;
-    this.scaleY = scaleY;
-    this.trslationX = trslationX;
-    this.trslationY = trslationY;
+  constructor(params) {
+    this.scaleX = params.scaleX || 1;
+    this.scaleY = params.scaleY || 1;
+    this.trslationX = params.trslationX || 0;
+    this.trslationY = params.trslationY || 0;
+    this.zoomIn = document.getElementById(params.zoomInId);
+    this.zoomOut = document.getElementById(params.zoomOutId);
+    this.dragScroll = null;
+    this.init();
+  }
+
+  setUpDraggScroll(element) {
+    this.dragScroll = document.getElementById(element);
+    this.dragScroll.addEventListener("mousedown", (event) => {
+      event.preventDefault();
+      GL.isDragging = true;
+      GL.startX = event.clientX - this.trslationX;
+      GL.startY = event.clientY - this.trslationY;
+    });
+    this.dragScroll.addEventListener("mousemove", (event) => {
+      event.preventDefault();
+      if (GL.isDragging) {
+        this.trslationX = event.clientX - GL.startX;
+        this.trslationY = event.clientY - GL.startY;
+        viewport.setAttribute(
+          "transform",
+          `matrix(${this.scaleX} 0 0 ${this.scaleY} ${this.trslationX}, ${this.trslationY})`
+        );
+      }
+    });
+    this.dragScroll.addEventListener("mouseup", (event) => {
+      //   GL.startX = this.trslationX;
+      //   GL.startY = this.trslationY;
+    });
+  }
+
+  init() {
+    this.zoomIn.addEventListener("click", (event) => {
+      this.zoomInCalculate();
+      this.setViewPort();
+    });
+    this.zoomOut.addEventListener("click", (event) => {
+      this.zoomOutCalculate();
+      this.setViewPort();
+    });
   }
 
   getCoords() {
     return `matrix(${this.scaleX} 0 0 ${this.scaleY} ${this.trslationX} ${this.trslationY})`;
+  }
+
+  setViewPort() {
+    const viewport = document.getElementById("viewport");
+    const coords = this.getCoords();
+    viewport.setAttribute("transform", this.getCoords());
   }
 
   reset() {
@@ -590,19 +695,23 @@ class Matrix {
     this.trslationY = 0;
   }
 
-  zoomIn() {
+  zoomInCalculate() {
     if (this.scaleX <= 1.5) {
       this.scaleX += 0.05;
       this.scaleY += 0.05;
+      this.trslationX += this.trslationX * 1.25;
+      this.trslationY += this.trslationY * 1.25;
     } else {
       console.warn("no puedes aumentar más");
     }
   }
 
-  zoomOut() {
+  zoomOutCalculate() {
     if (this.scaleX >= 0.45) {
       this.scaleX -= 0.05;
       this.scaleY -= 0.05;
+      this.trslationX -= this.trslationX * 0.75;
+      this.trslationY -= this.trslationY * 0.75;
     } else {
       console.warn("no puedes disminuir más");
     }
@@ -613,7 +722,10 @@ class Simple {
   constructor(svgContainerId) {
     this.svgContainer = document.getElementById(svgContainerId);
     this.layerRoot = null;
-    this.matrix = new Matrix();
+    this.matrix = new Matrix({
+      zoomInId: "zoom-in",
+      zoomOutId: "zoom-out",
+    });
     this.init();
   }
 
@@ -643,7 +755,17 @@ class Simple {
     diagramGroup.appendChild(element);
   }
 
-  drawArrow(coordPairs) {}
+  drawArrow(element) {
+    const diagramGroup = this.svgContainer
+      .querySelector(".viewport")
+      .querySelector(".layer-root")
+      .querySelector(".diagram-group");
+
+    const diagramChildren = diagramGroup.querySelector(".diagram-children");
+    if (diagramChildren) {
+      diagramChildren.appendChild(element);
+    }
+  }
 
   init() {
     this.svgContainer.setAttribute("data-element-id", "process-1234");

@@ -1,3 +1,7 @@
+body.cursor-grab {
+  cursor: grab;
+}
+
 .top-menu {
   padding: 0;
   text-align: center;
@@ -19,7 +23,8 @@
 }
 
 /* Diagrama General */
-.diagram-outline {
+.diagram-outline,
+.outline-gateway {
   fill: none;
 }
 
@@ -28,6 +33,26 @@
   stroke-opacity: 0;
   stroke: white;
   stroke-width: 15px;
+}
+
+.diagram-element.hover {
+  cursor: move;
+}
+
+.diagram-element.selected .diagram-outline {
+  visibility: visible;
+  stroke: #0095ff;
+  stroke-width: 2px;
+  fill: none;
+}
+
+.diagram-element.selected .outline-gateway {
+  transform-box: fill-box;
+  transform: rotate(45deg);
+  transform-origin: center center;
+  stroke-width: 2px;
+  stroke: #0095ff;
+  fill: none;
 }
 
 /* POOL */
